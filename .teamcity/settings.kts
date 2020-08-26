@@ -31,12 +31,12 @@ version = "2019.1"
 class Repository constructor(val name: String, val url: String)
 
 class Build(val repo: Repository) : BuildType({
-    id(repo.name)
+    id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
     vcs {
         root(GitVcsRoot {
-            id("VCS ${repo.name}")
+            id("VCS ${repo.name.toExtId()}")
             name = repo.name
             url = repo.url
         })
