@@ -51,8 +51,8 @@ class Build(val repo: Repository) : BuildType({
 })
 
 val repositories = listOf(
-        Repository("xamarin_forms-demo-app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git"),
-        Repository("xamarin_forms-stocks-app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git")
+        Repository("xamarin_forms_demo_app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git"),
+        Repository("xamarin_forms_stocks_app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git")
 )
 
 project {
