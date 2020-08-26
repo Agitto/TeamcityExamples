@@ -35,9 +35,9 @@ class Build(val repo: Repository) : BuildType({
     id(repo.name.toExtId())
     name = "Build_${repo.name}"
 
+
     vcs {
         root(GitVcsRoot {
-            id(repo.name.toExtId())
             name = repo.name
             url = repo.url
         })
