@@ -44,7 +44,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     steps {
         dotnetBuild {
             configuration = "debug"
-
+            workingDir = "CS"
         }
     }
 })
