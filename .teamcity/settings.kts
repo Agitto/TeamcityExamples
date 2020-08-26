@@ -31,12 +31,12 @@ version = "2019.1"
 class Repository constructor(val name: String, val url: String)
 
 class Build(val repo: Repository) : BuildType({
-    id(repo.name.toExtId())
-    name = "Build ${repo.name}"
+    id(repo.name)
+    name = "Build_${repo.name}"
 
     vcs {
         root(GitVcsRoot {
-            id("VCS ${repo.name.toExtId()}")
+            id("VCS_${repo.name}")
             name = repo.name
             url = repo.url
         })
@@ -51,8 +51,8 @@ class Build(val repo: Repository) : BuildType({
 })
 
 val repositories = listOf(
-        Repository("xamarin-forms-demo-app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git"),
-        Repository("xamarin-forms-stocks-app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git")
+        Repository("xamarin_forms-demo-app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git"),
+        Repository("xamarin_forms-stocks-app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git")
 )
 
 project {
