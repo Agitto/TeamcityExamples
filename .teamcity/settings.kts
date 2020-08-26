@@ -1,3 +1,4 @@
+import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
@@ -31,12 +32,12 @@ version = "2019.1"
 class Repository constructor(val name: String, val url: String)
 
 class Build(val repo: Repository) : BuildType({
-    id(repo.name)
+    id(repo.name.toExtId())
     name = "Build_${repo.name}"
 
     vcs {
         root(GitVcsRoot {
-            id(repo.name)
+            id(repo.name.toExtId())
             name = repo.name
             url = repo.url
         })
