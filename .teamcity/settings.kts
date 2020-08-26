@@ -1,4 +1,9 @@
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -26,11 +31,11 @@ version = "2019.1"
 class Repository constructor(val name: String, val url: String)
 
 class Build(val repo: Repository) : BuildType({
-    id(repo.name.toExtId())
+    id(repo.name)
     name = "Build ${repo.name}"
 
     vcs {
-        GitVcsRoot({
+        root(GitVcsRoot {
             name = repo.name
             url = repo.url
         })
@@ -40,14 +45,13 @@ class Build(val repo: Repository) : BuildType({
         maven {
             goals = "clean package"
             mavenVersion = defaultProvidedVersion()
-            jdkHome = "%env.${jdk}%"
         }
     }
 })
 
 val repositories = listOf(
         Repository("xamarin-forms-demo-app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git"),
-        Repository("xamarin-forms-stocks-app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git"),
+        Repository("xamarin-forms-stocks-app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git")
 )
 
 project {
