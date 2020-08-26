@@ -31,16 +31,13 @@ version = "2019.1"
 
 class Repository constructor(val name: String, val url: String)
 
-class Build(val repo: Repository) : BuildType({
+class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
     name = "Build_${repo.name}"
 
 
     vcs {
-        root(GitVcsRoot {
-            name = repo.name
-            url = repo.url
-        })
+        root(vcsRoot)
     }
 
     steps {
@@ -58,6 +55,12 @@ val repositories = listOf(
 
 project {
     for(repo in repositories) {
-        buildType(Build(repo))
+        val vcs = GitVcsRoot{
+            id(repo.name.toExtId())
+            name = repo.name
+            url = repo.url
+        }
+        vcsRoot(vcs)
+        buildType(Build(repo, vcs))
     }
 }
