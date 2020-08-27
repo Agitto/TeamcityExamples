@@ -4,6 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetBuild
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.nuGetInstaller
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 
@@ -42,9 +43,28 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     }
 
     steps {
+        nuGetInstaller {
+            noCache = true
+            sources = "./packages"
+            
+        }
+
         dotnetBuild {
             configuration = "debug"
             workingDir = "CS"
+        }
+    }
+
+    dependencies {
+        dependency(AbsoluteId("NativeMobile_DevBuild_Install_NugetXamarinLicense")) {
+            snapshot {
+
+            }
+
+            artifacts {
+                cleanDestination = true
+                artifactRules = "*.nupkg=>./packages"
+            }
         }
     }
 })
