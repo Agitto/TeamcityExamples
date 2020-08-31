@@ -72,8 +72,8 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
 })
 
 val repositories = listOf(
-        Repository("xamarin_forms_demo_app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git", "DemoCenter.sln", "20.1.3+"),
-        Repository("xamarin_forms_stocks_app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git", "Stocks.sln","19.2.1+")
+        Repository("xamarin_forms_demo_app","https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git", "CS/DemoCenter.sln", "20.1.3+"),
+        Repository("xamarin_forms_stocks_app","https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git", "CS/Stocks.sln","19.2.1+")
 )
 
 project {
