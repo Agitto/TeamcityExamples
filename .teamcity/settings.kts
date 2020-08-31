@@ -35,7 +35,7 @@ class Repository constructor(val name: String, val url: String, val sln: String,
 
 class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
-    name = "Build_${repo.name}"
+    name = "Build ${repo.name}"
 
 
     vcs {
