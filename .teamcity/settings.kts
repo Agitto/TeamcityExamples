@@ -46,7 +46,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
         nuGetInstaller {
             noCache = true
             sources = "./packages"
-            
+            toolPath = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/nuget"
         }
 
         dotnetBuild {
@@ -64,6 +64,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
             artifacts {
                 cleanDestination = true
                 artifactRules = "*.nupkg=>./packages"
+                lastSuccessful()
             }
         }
     }
