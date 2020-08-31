@@ -25,8 +25,5 @@ changeBuildType(RelativeId("XamarinFormsDemoApp")) {
         }
     }
     steps {
-        update<NuGetInstallerStep>(0) {
-            sources = "./packages"
-        }
     }
 }
