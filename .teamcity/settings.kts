@@ -45,7 +45,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     steps {
         nuGetInstaller {
             noCache = true
-            sources = "./packages"
+            sources = "../../packages"
             toolPath = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/nuget"
 
 //            toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
