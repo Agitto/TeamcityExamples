@@ -38,6 +38,9 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
+    val parentId = RelativeId("123").value.removeSuffix("_Examples123")
+    val nugetBuildId = "${parentId}_Install_NugetXamarinLicense"
+
     vcs {
         root(vcsRoot)
     }
@@ -46,7 +49,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
         vcs {
         }
         finishBuildTrigger {
-            buildType = RelativeId("_Install_NugetXamarinLicense").value
+            buildType = nugetBuildId
             successfulOnly = true
         }
     }
@@ -66,7 +69,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     }
 
     dependencies {
-        dependency(RelativeId("Install_NugetXamarinLicense")) {
+        dependency(AbsoluteId(nugetBuildId)) {
             snapshot {
                 onDependencyFailure = FailureAction.FAIL_TO_START
             }
