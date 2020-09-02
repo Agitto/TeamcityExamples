@@ -34,7 +34,7 @@ version = "2019.1"
 
 class Repository constructor(val name: String, val url: String, val sln: String, val branch: String)
 
-class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String) : BuildType({
+class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
@@ -46,7 +46,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String)
         vcs {
         }
         finishBuildTrigger {
-            buildType = "_Install_NugetXamarinLicense"
+            buildType = RelativeId("_Install_NugetXamarinLicense").value
             successfulOnly = true
         }
     }
@@ -66,7 +66,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String)
     }
 
     dependencies {
-        dependency(AbsoluteId("_Install_NugetXamarinLicense")) {
+        dependency(RelativeId("Install_NugetXamarinLicense")) {
             snapshot {
                 onDependencyFailure = FailureAction.FAIL_TO_START
             }
@@ -94,6 +94,6 @@ project {
             branch = repo.branch
         }
         vcsRoot(vcs)
-        buildType(Build(repo, vcs, "parentId!!.value"))
+        buildType(Build(repo, vcs))
     }
 }
