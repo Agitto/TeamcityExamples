@@ -303,8 +303,8 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
 //            workingDir = "CS"
 //        }
         msBuild {
-            workingDir = "CS"
-            targets = "clean,debug"
+            targets = "clean,build"
+            path = repo.branches[0].sln
         }
     }
 
