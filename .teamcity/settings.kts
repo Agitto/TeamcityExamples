@@ -96,7 +96,12 @@ project {
             url = repo.url
             branch = repo.branch
         }
-        vcsRoot(vcs)
-        buildType(Build(repo, vcs))
+
+        subProject {
+            id(repo.name.toExtId())
+            name = "Build ${repo.name}"
+            vcsRoot(vcs)
+            buildType(Build(repo, vcs))
+        }
     }
 }
