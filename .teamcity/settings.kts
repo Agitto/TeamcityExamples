@@ -1,5 +1,3 @@
-package _Self.buildTypes
-
 import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
@@ -48,7 +46,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String)
         vcs {
         }
         finishBuildTrigger {
-            buildType = "${parentId}_Install_NugetXamarinLicense"
+            buildType = "_Install_NugetXamarinLicense"
             successfulOnly = true
         }
     }
@@ -68,7 +66,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String)
     }
 
     dependencies {
-        dependency(AbsoluteId("${parentId}_Install_NugetXamarinLicense")) {
+        dependency(AbsoluteId("_Install_NugetXamarinLicense")) {
             snapshot {
                 onDependencyFailure = FailureAction.FAIL_TO_START
             }
