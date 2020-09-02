@@ -38,7 +38,7 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
-    val parentId = RelativeId("123").value.replace("_Examples123", "")
+    val parentId = RelativeId("123").value.replace("_Examples_123", "")
     val nugetBuildId = "${parentId}_Install_NugetXamarinLicense"
 
     vcs {
