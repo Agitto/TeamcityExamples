@@ -1,10 +1,9 @@
 import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetBuild
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.exec
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.nuGetInstaller
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
@@ -234,10 +233,7 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2019.1"
 
 var repositories = mutableListOf<GitRepository>()
-
 var reposArray = JSONArray(realJson)
-
-val repos = mutableListOf<GitRepository>()
 
 for(i in 0 until reposArray.length()) {
     val obj = reposArray.getJSONObject(i)
@@ -264,14 +260,14 @@ for(i in 0 until reposArray.length()) {
 
 class GitRepository constructor(val id: Int,
                                 val name: String,
-                                val full_name: String,
-                                val git_url: String,
-                                val clone_url: String,
-                                val Branches: List<GitBranch>)
+                                val fullName: String,
+                                val gitUrl: String,
+                                val cloneUrl: String,
+                                val branches: List<GitBranch>)
 
 class GitBranch constructor(val name: String, val sln: String)
 
-class Build(val repo: GitRepository, val vcsRoot: GitVcsRoot) : BuildType({
+class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : BuildType({
     id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
@@ -296,11 +292,17 @@ class Build(val repo: GitRepository, val vcsRoot: GitVcsRoot) : BuildType({
             noCache = true
             sources = "../../packages"
             toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
-            projects = repo.Branches[0].sln
+            projects = repo.branches[0].sln
         }
 
+       script {
+           name = "Restore"
+           scriptContent = "nuget restore -NoCache"
+           workingDir = "CS"
+       }
+
         dotnetBuild {
-            configuration = "debug"
+            configuration = "Debug"
             workingDir = "CS"
         }
     }
@@ -326,8 +328,8 @@ project {
         val vcs = GitVcsRoot{
             id(repo.name.toExtId())
             name = repo.name
-            url = repo.clone_url
-            branch = repo.Branches[0].name
+            url = repo.cloneUrl
+            branch = repo.branches[0].name
         }
 
         subProject {
