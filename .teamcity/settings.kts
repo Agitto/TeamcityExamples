@@ -94,6 +94,6 @@ project {
             branch = repo.branch
         }
         vcsRoot(vcs)
-        buildType(Build(repo, vcs, parentId!!.value))
+        buildType(Build(repo, vcs, "parentId!!.value"))
     }
 }
