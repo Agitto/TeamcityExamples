@@ -1,9 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetBuild
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.exec
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.nuGetInstaller
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
@@ -295,15 +292,19 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
             projects = repo.branches[0].sln
         }
 
-       script {
-           name = "Restore"
-           scriptContent = "nuget restore -NoCache"
-           workingDir = "CS"
-       }
+//       script {
+//           name = "Restore"
+//           scriptContent = "nuget restore -NoCache"
+//           workingDir = "CS"
+//       }
 
-        dotnetBuild {
-            configuration = "Debug"
+//        dotnetBuild {
+//            configuration = "Debug"
+//            workingDir = "CS"
+//        }
+        msBuild {
             workingDir = "CS"
+            targets = "clean,debug"
         }
     }
 
