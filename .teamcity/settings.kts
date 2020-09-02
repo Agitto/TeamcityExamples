@@ -1,3 +1,5 @@
+package _Self.buildTypes
+
 import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.Swabra
@@ -5,6 +7,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dotnetBuild
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.nuGetInstaller
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 
@@ -33,20 +36,27 @@ version = "2019.1"
 
 class Repository constructor(val name: String, val url: String, val sln: String, val branch: String)
 
-class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
+class Build(val repo: Repository, val vcsRoot: GitVcsRoot, val parentId: String) : BuildType({
     id(repo.name.toExtId())
     name = "Build ${repo.name}"
 
-
     vcs {
         root(vcsRoot)
+    }
+
+    triggers {
+        vcs {
+        }
+        finishBuildTrigger {
+            buildType = "${parentId}_Install_NugetXamarinLicense"
+            successfulOnly = true
+        }
     }
 
     steps {
         nuGetInstaller {
             noCache = true
             sources = "../../packages"
-//            toolPath = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/nuget"
             toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
             projects = repo.sln
         }
@@ -58,9 +68,9 @@ class Build(val repo: Repository, val vcsRoot: GitVcsRoot) : BuildType({
     }
 
     dependencies {
-        dependency(AbsoluteId("NativeMobile_DevBuild_Install_NugetXamarinLicense")) {
+        dependency(AbsoluteId("${parentId}_Install_NugetXamarinLicense")) {
             snapshot {
-
+                onDependencyFailure = FailureAction.FAIL_TO_START
             }
 
             artifacts {
@@ -86,6 +96,6 @@ project {
             branch = repo.branch
         }
         vcsRoot(vcs)
-        buildType(Build(repo, vcs))
+        buildType(Build(repo, vcs, parentId!!.value))
     }
 }
