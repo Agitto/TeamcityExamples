@@ -319,6 +319,7 @@ class Build(private val repo: GitRepository,
             private val version: String) : BuildType({
     id("${repo.name}_${version}".toExtId())
     name = "Build ${repo.name}"
+    description = repo.cloneUrl.replace(".git", "")
 
 //    val parentId = RelativeId("123").value.replace("_Examples_123", "")
     val parentBuildId = if(version == "dev") "DevBuild" else version.replace(".", "")
@@ -398,8 +399,7 @@ project {
                     url = repo.cloneUrl
                     branch = matchingBranch.name
                 }
-                description = repo.cloneUrl.replace(".git", "")
-//                name = "Build ${repo.name} $version"
+
                 vcsRoot(vcs)
                 buildType(Build(repo, vcs, matchingBranch, version))
             }
