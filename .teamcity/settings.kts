@@ -280,7 +280,7 @@ class GitRepository constructor(val id: Int,
 
     fun getBranch(version: String) : GitBranch? {
         val highest: GitBranch = getHighestBranch()!!
-        if(version == "Dev") {
+        if(version == "dev") {
             return highest;
         }
 
@@ -321,7 +321,8 @@ class Build(private val repo: GitRepository,
     name = "Build ${repo.name}"
 
 //    val parentId = RelativeId("123").value.replace("_Examples_123", "")
-    val nugetBuildId = "NativeMobile_${version.replace(".", "")}_Install_NugetXamarinLicense"
+    val parentBuildId = if(version == "dev") "DevBuild" else version.replace(".", "")
+    val nugetBuildId = "NativeMobile_${parentBuildId}_Install_NugetXamarinLicense"
 
     vcs {
         root(vcsRoot)
@@ -382,7 +383,7 @@ class Build(private val repo: GitRepository,
     }
 })
 
-val versions = listOf<String>("19.1", "19.2", "20.1", "20.2", "Dev")
+val versions = listOf<String>("19.1", "19.2", "20.1", "20.2", "dev")
 
 project {
     for (version in versions) {
