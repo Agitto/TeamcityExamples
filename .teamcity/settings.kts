@@ -311,7 +311,7 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
 
         script {
             name = "MSBuild"
-            scriptContent = "msbuild ${repo.branches[0].sln} /t:clean,build /p:Configuration:Debug /clp:errorsonly"
+            scriptContent = "msbuild ${repo.branches[0].sln} /t:clean,build /p:Configuration=Debug /clp:errorsonly"
         }
     }
 
