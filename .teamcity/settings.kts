@@ -398,7 +398,7 @@ project {
                     url = repo.cloneUrl
                     branch = matchingBranch.name
                 }
-
+                description = repo.cloneUrl.replace(".git", "")
 //                name = "Build ${repo.name} $version"
                 vcsRoot(vcs)
                 buildType(Build(repo, vcs, matchingBranch, version))
