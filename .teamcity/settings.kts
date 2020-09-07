@@ -5,6 +5,8 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 import org.json.*
+import java.lang.Exception
+import java.lang.NumberFormatException
 
 val realJson = "[\n" +
         "  {\n" +
@@ -260,16 +262,66 @@ class GitRepository constructor(val id: Int,
                                 val fullName: String,
                                 val gitUrl: String,
                                 val cloneUrl: String,
-                                val branches: List<GitBranch>)
+                                val branches: MutableList<GitBranch>) {
 
-class GitBranch constructor(val name: String, val sln: String)
+    init {
+        branches.sortBy { branch -> branch.major }
+    }
 
-class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : BuildType({
-    id(repo.name.toExtId())
+    fun getHighestBranch() : GitBranch? {
+        for (branch in branches) {
+            if(branch.isHighest) {
+                return branch
+            }
+        }
+
+        return null;
+    }
+
+    fun getBranch(version: String) : GitBranch? {
+        val highest: GitBranch = getHighestBranch()!!
+        if(version == "Dev") {
+            return highest;
+        }
+
+        var numericVersion = version.toDouble()
+
+        for(branch in branches) {
+            if(branch.major == numericVersion) {
+                return branch
+            }
+        }
+
+        if(highest.major <= numericVersion) {
+            return highest
+        }
+
+        return null
+    }
+}
+
+class GitBranch constructor(val name: String, val sln: String) {
+    val isHighest = name.endsWith("+")
+    var major: Double = 0.0
+    var minor: Int = 0
+
+    init {
+        val match = Regex("^(?<major>\\d{1,2}\\.\\d)\\.(?<minor>\\d{1,2})\\+?\$").matchEntire(name)
+                ?: throw Exception("couldn't parse $name")
+        major = match!!.groupValues[1]!!.toDouble()
+        minor = match!!.groupValues[2]!!.toInt()
+    }
+}
+
+class Build(private val repo: GitRepository,
+            private val vcsRoot: GitVcsRoot,
+            private val branch: GitBranch,
+            private val version: String) : BuildType({
+    id("${repo.name}_${version}".toExtId())
     name = "Build ${repo.name}"
 
-    val parentId = RelativeId("123").value.replace("_Examples_123", "")
-    val nugetBuildId = "${parentId}_Install_NugetXamarinLicense"
+//    val parentId = RelativeId("123").value.replace("_Examples_123", "")
+    val nugetBuildId = "NativeMobile_${version.replace(".", "")}_Install_NugetXamarinLicense"
 
     vcs {
         root(vcsRoot)
@@ -289,7 +341,7 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
             noCache = true
             sources = "../../packages"
             toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
-            projects = repo.branches[0].sln
+            projects = branch.sln
         }
 
 //       script {
@@ -311,7 +363,7 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
 
         script {
             name = "MSBuild"
-            scriptContent = "msbuild ${repo.branches[0].sln} /t:clean,build /p:Configuration=Debug /clp:errorsonly"
+            scriptContent = "msbuild ${branch.sln} /t:clean,build /p:Configuration=Debug /clp:errorsonly"
         }
     }
 
@@ -330,21 +382,26 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
     }
 })
 
+val versions = listOf<String>("19.1", "19.2", "20.1", "20.2", "Dev")
 
 project {
-    for(repo in repositories) {
-        val vcs = GitVcsRoot{
-            id(repo.name.toExtId())
-            name = repo.name
-            url = repo.cloneUrl
-            branch = repo.branches[0].name
-        }
-
+    for (version in versions) {
         subProject {
-            id(repo.name.toExtId())
-            name = "Build ${repo.name}"
-            vcsRoot(vcs)
-            buildType(Build(repo, vcs))
+            id(version.toExtId())
+            name = version
+            for (repo in repositories) {
+                val matchingBranch = repo.getBranch(version) ?: continue
+                val vcs = GitVcsRoot {
+                    id("${repo.name}_${version}".toExtId())
+                    name = repo.name
+                    url = repo.cloneUrl
+                    branch = matchingBranch.name
+                }
+
+                name = "Build ${repo.name} $version"
+                vcsRoot(vcs)
+                buildType(Build(repo, vcs, matchingBranch, version))
+            }
         }
     }
 }
