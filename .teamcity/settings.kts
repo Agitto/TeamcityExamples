@@ -383,7 +383,7 @@ class Build(private val repo: GitRepository,
     }
 })
 
-val versions = listOf<String>("19.1", "19.2", "20.1", "20.2", "dev")
+val versions = listOf<String>("19.2", "20.1", "20.2", "dev")
 
 project {
     for (version in versions) {
