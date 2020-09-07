@@ -302,9 +302,16 @@ class Build(private val repo: GitRepository, private val vcsRoot: GitVcsRoot) : 
 //            configuration = "Debug"
 //            workingDir = "CS"
 //        }
-        msBuild {
-            targets = "clean,build"
-            path = repo.branches[0].sln
+//        msBuild {
+//            targets = "clean,build"
+//            version = MSBuildStep.MSBuildVersion.MONO_v4_5
+//            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
+//            path = repo.branches[0].sln
+//        }
+
+        script {
+            name = "MSBuild"
+            scriptContent = "msbuild ${repo.branches[0].sln} /t:clean, build, p:Configuration:Debug, /clp:errorsonly"
         }
     }
 
