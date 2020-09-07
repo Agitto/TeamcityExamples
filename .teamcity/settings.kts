@@ -398,7 +398,7 @@ project {
                     branch = matchingBranch.name
                 }
 
-                name = "Build ${repo.name} $version"
+//                name = "Build ${repo.name} $version"
                 vcsRoot(vcs)
                 buildType(Build(repo, vcs, matchingBranch, version))
             }
