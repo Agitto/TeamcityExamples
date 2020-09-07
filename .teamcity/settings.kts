@@ -48,6 +48,7 @@ for(i in 0 until reposArray.length()) {
                 branchObj.getString("sln")
         )
         branches.add(branch)
+        branches.sortByDescending { branch -> branch.major }
     }
     val repo = GitRepository(
             obj.getInt("id"),
