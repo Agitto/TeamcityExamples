@@ -1,1 +1,199 @@
-123
+[
+  {
+    "id": 259696816,
+    "name": "xamarin-data-form",
+    "full_name": "DevExpress-Examples/xamarin-data-form",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-data-form/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-data-form.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-data-form.git",
+    "Branches": [
+      {
+        "name": "20.1.1+",
+        "commit": {
+          "sha": "2eb5901e54b29b44fcca9b7a0f3e6a8878cffa7f"
+        },
+        "sln": "CS/DataForm.sln"
+      }
+    ]
+  },
+  {
+    "id": 228646956,
+    "name": "xamarin-forms-demo-app",
+    "full_name": "DevExpress-Examples/xamarin-forms-demo-app",
+    "description": "Xamarin, Xamarin.Forms",
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-forms-demo-app/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-forms-demo-app.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-forms-demo-app.git",
+    "Branches": [
+      {
+        "name": "19.2.4+",
+        "commit": {
+          "sha": "c955b09d2794454e9b2ee436be3ad99d5d2a7b5d"
+        },
+        "sln": "CS/DemoCenter.sln"
+      },
+      {
+        "name": "20.1.3+",
+        "commit": {
+          "sha": "752b936dbf363f8af02e546d0a314d839ca034d2"
+        },
+        "sln": "CS/DemoCenter.sln"
+      }
+    ]
+  },
+  {
+    "id": 148444621,
+    "name": "xamarin-forms-financial-chart-example",
+    "full_name": "DevExpress-Examples/xamarin-forms-financial-chart-example",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-forms-financial-chart-example/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-forms-financial-chart-example.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-forms-financial-chart-example.git",
+    "Branches": [
+      {
+        "name": "1.1.1+",
+        "commit": {
+          "sha": "c9ec1ff157f45e19571f1e3a91954bf5169daef0"
+        },
+        "sln": "CS/FinancialChartExample.sln"
+      }
+    ]
+  },
+  {
+    "id": 279337454,
+    "name": "xamarin-forms-logify-client-app",
+    "full_name": "DevExpress-Examples/xamarin-forms-logify-client-app",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-forms-logify-client-app/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-forms-logify-client-app.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-forms-logify-client-app.git",
+    "Branches": [
+      {
+        "name": "20.1.4+",
+        "commit": {
+          "sha": "c3a7ec4659f9807a53d759f1e044a5bcccd9b42a"
+        },
+        "sln": "CS/LogifyMobile.sln"
+      }
+    ]
+  },
+  {
+    "id": 148539860,
+    "name": "xamarin-forms-pie-chart-center-label-example",
+    "full_name": "DevExpress-Examples/xamarin-forms-pie-chart-center-label-example",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-forms-pie-chart-center-label-example/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-forms-pie-chart-center-label-example.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-forms-pie-chart-center-label-example.git",
+    "Branches": [
+      {
+        "name": "1.1.1+",
+        "commit": {
+          "sha": "657457d22c39b0e11aed383f4010e2cfbbf92f61"
+        },
+        "sln": "CS/PieChartExample.sln"
+      }
+    ]
+  },
+  {
+    "id": 243744496,
+    "name": "xamarin-forms-stocks-app",
+    "full_name": "DevExpress-Examples/xamarin-forms-stocks-app",
+    "description": "Xamarin Forms Stocks App",
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/xamarin-forms-stocks-app/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git",
+    "clone_url": "https://github.com/DevExpress-Examples/xamarin-forms-stocks-app.git",
+    "Branches": [
+      {
+        "name": "19.2.1+",
+        "commit": {
+          "sha": "c4d954366f2c2f79cabbedcc7a91cf9e2fc6882c"
+        },
+        "sln": "CS/Stocks.sln"
+      }
+    ]
+  },
+  {
+    "id": 191357991,
+    "name": "Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-1",
+    "full_name": "DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-1",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-1/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-1.git",
+    "clone_url": "https://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-1.git",
+    "Branches": [
+      {
+        "name": "19.1.2+",
+        "commit": {
+          "sha": "5fe7c772ebf3a1318a0336982b0fe3d7543a3415"
+        },
+        "sln": "CS/GettingStarted1.sln"
+      },
+      {
+        "name": "19.2.3+",
+        "commit": {
+          "sha": "70dca987d51a9186a30d4cd57f242457a7138169"
+        },
+        "sln": "CS/GettingStarted1.sln"
+      },
+      {
+        "name": "19.2.7+",
+        "commit": {
+          "sha": "3304a52212c6ac08f33989a7c322e69eb4e38bae"
+        },
+        "sln": "CS/GettingStarted1.sln"
+      }
+    ]
+  },
+  {
+    "id": 191350804,
+    "name": "Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-2",
+    "full_name": "DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-2",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-2/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-2.git",
+    "clone_url": "https://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-2.git",
+    "Branches": [
+      {
+        "name": "19.1.2+",
+        "commit": {
+          "sha": "f39793924132e8a027bf0e4eaf00370123afe4ea"
+        },
+        "sln": "CS/GettingStarted2.sln"
+      },
+      {
+        "name": "19.2.7+",
+        "commit": {
+          "sha": "4d6618f6621bfc9d7a35c758d5772aebc653aa9b"
+        },
+        "sln": "CS/GettingStarted2.sln"
+      }
+    ]
+  },
+  {
+    "id": 191364822,
+    "name": "Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-3",
+    "full_name": "DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-3",
+    "description": null,
+    "branches_url": "https://api.github.com/repos/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-3/branches{/branch}",
+    "git_url": "git://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-3.git",
+    "clone_url": "https://github.com/DevExpress-Examples/Xamarin.Forms-Navigation-Views-Getting-Started-Lesson-3.git",
+    "Branches": [
+      {
+        "name": "19.1.2+",
+        "commit": {
+          "sha": "28ee35fb7f58e19baeee9095eaaa7bf311a30e64"
+        },
+        "sln": "CS/DrawerSample.sln"
+      },
+      {
+        "name": "19.2.7+",
+        "commit": {
+          "sha": "b239c0205f9a6a5d4823c257e2f2bdc6439d6ee4"
+        },
+        "sln": "CS/DrawerSample.sln"
+      }
+    ]
+  }
+]
