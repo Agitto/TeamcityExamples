@@ -26,7 +26,7 @@ changeBuildType(RelativeId("XamarinFormsStocksApp")) {
     }
     steps {
         update<MSBuildStep>(1) {
-            version = MSBuildStep.MSBuildVersion.MONO_v4_5
+            version = MSBuildStep.MSBuildVersion.V4_5
             toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
         }
     }
