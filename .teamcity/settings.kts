@@ -384,24 +384,54 @@ class Build(private val repo: GitRepository,
     }
 })
 
-val versions = listOf<String>("19.2", "20.1", "20.2", "dev")
+val versions = listOf<String>("19.2", "20.1", "20.2", "dev", "fetcher")
 
 project {
     for (version in versions) {
         subProject {
-            id(version.toExtId())
-            name = version
-            for (repo in repositories) {
-                val matchingBranch = repo.getBranch(version) ?: continue
+            if(version == "fetcher") {
+                id("fetcher")
+                name = "Fetch Examples"
                 val vcs = GitVcsRoot {
-                    id("${repo.name}_${version}".toExtId())
-                    name = repo.name
-                    url = repo.cloneUrl
-                    branch = matchingBranch.name
+                    id("fetcher")
+                    name = "fetcher"
+                    url = "https://github.com/Agitto/GithubSamples.git"
+                    branch = "master"
                 }
-
                 vcsRoot(vcs)
-                buildType(Build(repo, vcs, matchingBranch, version))
+                buildType {
+                    id("fetcherBuild")
+                    name = "Fetch Examples"
+
+                    vcs {
+                        root(vcs)
+                    }
+
+                    steps {
+                        script {
+                            name = "run"
+                            workingDir = "GithubExamples"
+                            scriptContent = "dotnet run"
+                        }
+                    }
+                }
+            }
+
+            else {
+                id(version.toExtId())
+                name = version
+                for (repo in repositories) {
+                    val matchingBranch = repo.getBranch(version) ?: continue
+                    val vcs = GitVcsRoot {
+                        id("${repo.name}_${version}".toExtId())
+                        name = repo.name
+                        url = repo.cloneUrl
+                        branch = matchingBranch.name
+                    }
+
+                    vcsRoot(vcs)
+                    buildType(Build(repo, vcs, matchingBranch, version))
+                }
             }
         }
     }
