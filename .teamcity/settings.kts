@@ -265,7 +265,7 @@ class GitRepository constructor(val id: Int,
                                 val branches: MutableList<GitBranch>) {
 
     init {
-        branches.sortBy { branch -> branch.major }
+        branches.sortByDescending { branch -> branch.major }
     }
 
     fun getHighestBranch() : GitBranch? {
