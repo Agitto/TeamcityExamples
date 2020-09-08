@@ -184,7 +184,10 @@ class Build(private val repo: GitRepository,
             scriptContent = "msbuild ${branch.sln} " +
                     "/t:clean,build " +
                     "/p:Configuration=Debug " +
-                    "/clp:errorsonly "
+                    "/clp:errorsonly " +
+                    "/restore " +
+                    "/p:RestoreAdditionalProjectSources=../packages" +
+                    "/p:RestoreNoCache"
         }
     }
 
