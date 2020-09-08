@@ -155,33 +155,16 @@ class Build(private val repo: GitRepository,
     }
 
     steps {
-//        nuGetInstaller {
-//            noCache = true
-//            sources = "../../packages"
-//            toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
-//            projects = branch.sln
-//        }
-
-//       script {
-//           name = "Restore"
-//           scriptContent = "nuget restore -NoCache"
-//           workingDir = "CS"
-//       }
-
-//        dotnetBuild {
-//            configuration = "Debug"
-//            workingDir = "CS"
-//        }
-//        msBuild {
-//            targets = "clean,build"
-//            version = MSBuildStep.MSBuildVersion.MONO_v4_5
-//            toolsVersion = MSBuildStep.MSBuildToolsVersion.V4_0
-//            path = repo.branches[0].sln
-//        }
-
         script {
             name = "clean nuget cache"
             scriptContent = "rm -rfd ~/.nuget/packages/devexpress.*"
+        }
+
+        nuGetInstaller {
+            noCache = true
+            sources = "../../packages"
+            toolPath = "%teamcity.tool.NuGet.CommandLine.5.5.0%"
+            projects = branch.sln
         }
 
         script {
@@ -189,11 +172,11 @@ class Build(private val repo: GitRepository,
             scriptContent = "msbuild ${branch.sln} " +
                     "/t:clean,build " +
                     "/p:Configuration=Debug " +
-                    "/clp:errorsonly " +
-                    "/restore " +
-                    "/p:RestoreSources=../../packages " +
+                    "/clp:errorsonly "
+//                    "/restore " +
+//                    "/p:RestoreSources=packages " +
 //                    "/p:RestoreConfigFile=../../../../NuGet.Config"
-                    "/p:RestoreNoCache=true"
+//                    "/p:RestoreNoCache=true"
         }
     }
 
