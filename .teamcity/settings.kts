@@ -187,7 +187,7 @@ class Build(private val repo: GitRepository,
 //                    "/clp:errorsonly " +
                     "/restore " +
                     "/p:RestoreSources=../../packages " +
-                    "/p:RestoreConfigFile=../../../.NuGet.Config"
+                    "/p:RestoreConfigFile=../../../../.NuGet.Config"
                     "/p:RestoreNoCache=true"
         }
     }
