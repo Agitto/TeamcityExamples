@@ -96,13 +96,13 @@ inner class GitRepository constructor(val id: Int,
                 if(branch.major == versionNumber) {
                     matchingBranch = branch
                 }
-
-                if(branch.major < versionNumber && branch.andHigher) {
+                else if(branch.major < versionNumber && branch.andHigher) {
                     matchingBranch = branch
                 }
 
                 if(matchingBranch != null) {
                     versionToBranch[version] = matchingBranch
+                    break;
                 }
             }
         }
