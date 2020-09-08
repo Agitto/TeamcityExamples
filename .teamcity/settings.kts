@@ -187,7 +187,7 @@ class Build(private val repo: GitRepository,
                     "/clp:errorsonly " +
                     "/restore " +
                     "/p:RestoreAdditionalProjectSources=../packages " +
-                    "/p:RestoreNoCache"
+                    "/p:RestoreNoCache=true"
         }
     }
 
