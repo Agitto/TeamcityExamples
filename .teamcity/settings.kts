@@ -186,7 +186,7 @@ class Build(private val repo: GitRepository,
                     "/p:Configuration=Debug " +
 //                    "/clp:errorsonly " +
 //                    "/restore " +
-                    "/p:RestoreAdditionalProjectSources=../../packages " +
+                    "/p:RestoreSources=../../packages " +
                     "/p:RestoreNoCache=true"
         }
     }
