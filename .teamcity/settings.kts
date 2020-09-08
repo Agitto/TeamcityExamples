@@ -180,14 +180,19 @@ class Build(private val repo: GitRepository,
 //        }
 
         script {
+            name = "clean nuget cache"
+            scriptContent = "rm -rfd ~/.nuget/packages/devexpress.*"
+        }
+
+        script {
             name = "MSBuild"
             scriptContent = "msbuild ${branch.sln} " +
                     "/t:clean,build " +
                     "/p:Configuration=Debug " +
-//                    "/clp:errorsonly " +
+                    "/clp:errorsonly " +
                     "/restore " +
                     "/p:RestoreSources=../../packages " +
-                    "/p:RestoreConfigFile=../../../../NuGet.Config"
+//                    "/p:RestoreConfigFile=../../../../NuGet.Config"
                     "/p:RestoreNoCache=true"
         }
     }
