@@ -2,11 +2,13 @@ import jetbrains.buildServer.configs.kotlin.v10.toExtId
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.schedule
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
 import org.json.*
 import java.io.File
 import java.lang.Exception
+import kotlin.concurrent.timer
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -134,7 +136,7 @@ class Build(private val repo: GitRepository,
             private val version: String) : BuildType({
     id("${repo.name}_${version}".toExtId())
     name = "Build ${repo.name}"
-    description = repo.cloneUrl.replace(".git", "")
+    description = repo.cloneUrl.replace(".git", "") + " [${branch.name}]"
 
     val parentBuildId = if(version == "dev") "DevBuild" else version.replace(".", "")
     val nugetBuildId = "NativeMobile_${parentBuildId}_Install_NugetXamarinLicense"
@@ -234,6 +236,16 @@ project {
 
             vcs {
                 root(vcs)
+            }
+
+            triggers {
+                schedule {
+                    schedulingPolicy = cron {
+                        hours = "2"
+                    }
+                    triggerBuild = always()
+                }
+
             }
 
             steps {
