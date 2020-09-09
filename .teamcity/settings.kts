@@ -255,7 +255,7 @@ project {
                 script {
                     name = "run"
                     workingDir = "GithubExamples"
-                    scriptContent = "dotnet run"
+                    scriptContent = "echo %githubAccessToken% && dotnet run --argument %githubAccessToken%"
                 }
             }
         }
