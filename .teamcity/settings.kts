@@ -125,8 +125,8 @@ class GitBranch constructor(val name: String, val sln: String) {
     init {
         val match = Regex("^(?<major>\\d{1,2}\\.\\d)\\.(?<minor>\\d{1,2})\\+?\$").matchEntire(name)
                 ?: throw Exception("couldn't parse $name")
-        major = match!!.groupValues[1]!!.toDouble()
-        minor = match!!.groupValues[2]!!.toInt()
+        major = match.groupValues[1].toDouble()
+        minor = match.groupValues[2].toInt()
     }
 }
 
@@ -188,7 +188,7 @@ class Build(private val repo: GitRepository,
 
             artifacts {
                 cleanDestination = true
-                artifactRules = "*.nupkg=>./packages" +
+                artifactRules = "*.nupkg=>./packages;" +
                         "*.nupkg=>./CS/packages"
                 lastSuccessful()
             }
