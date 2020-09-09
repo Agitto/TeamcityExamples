@@ -232,6 +232,12 @@ project {
             id("fetcherBuild")
             name = "Fetch Examples"
 
+            params {
+                password("githubAccessToken",
+                        "credentialsJSON:ac8dc05d-7e28-46c0-a46d-74b1f369e0cf",
+                        display = ParameterDisplay.HIDDEN)
+            }
+
             vcs {
                 root(vcs)
             }
