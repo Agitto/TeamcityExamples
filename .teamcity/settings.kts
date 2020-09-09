@@ -188,7 +188,8 @@ class Build(private val repo: GitRepository,
 
             artifacts {
                 cleanDestination = true
-                artifactRules = "*.nupkg=>./packages"
+                artifactRules = "*.nupkg=>./packages" +
+                        "*.nupkg=>./CS/packages"
                 lastSuccessful()
             }
         }
