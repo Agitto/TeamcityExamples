@@ -233,10 +233,11 @@ project {
             name = "Fetch Examples"
 
             params {
-                text("githubAccessToken",
-                        "9746127ccdba21fa1d53b2afbf566f27c087797a",
-                        display = ParameterDisplay.NORMAL)
+                password("githubAccessToken",
+                        "credentialsJSON:39f0d643-c067-493a-b5f6-ce9d13247332",
+                        display = ParameterDisplay.HIDDEN)
             }
+
 
             vcs {
                 root(vcs)
