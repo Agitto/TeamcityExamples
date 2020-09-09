@@ -203,6 +203,7 @@ project {
         subProject {
             id(version.toExtId())
             name = version
+
             for (repo in repositories) {
                 val matchingBranch = repo.getBranch(version) ?: continue
                 val vcs = GitVcsRoot {
@@ -256,7 +257,7 @@ project {
                 script {
                     name = "run"
                     workingDir = "GithubExamples"
-                    scriptContent = "echo %githubAccessToken% && dotnet run --argument %githubAccessToken%"
+                    scriptContent = "dotnet run --argument %githubAccessToken%"
                 }
             }
         }
