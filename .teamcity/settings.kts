@@ -188,8 +188,10 @@ class Build(private val repo: GitRepository,
 
             artifacts {
                 cleanDestination = true
-                artifactRules = "*.nupkg=>./packages;" +
-                        "*.nupkg=>./CS/packages"
+                artifactRules = """
+                                *.nupkg => ./packages
+                                *.nupkg => ./CS/packages
+                """.trimIndent()
                 lastSuccessful()
             }
         }
