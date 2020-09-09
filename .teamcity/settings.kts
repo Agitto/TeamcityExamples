@@ -234,7 +234,7 @@ project {
 
             params {
                 text("githubAccessToken",
-                        "credentialsJSON:ac8dc05d-7e28-46c0-a46d-74b1f369e0cf",
+                        "9746127ccdba21fa1d53b2afbf566f27c087797a",
                         display = ParameterDisplay.NORMAL)
             }
 
